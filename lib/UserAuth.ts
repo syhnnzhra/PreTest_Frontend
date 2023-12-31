@@ -23,8 +23,6 @@ export async function userLogin(loginInteface: loginInteface) {
         },
         body: JSON.stringify(bodyValue),
     });
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
     const data = await res.json();
 
     if (!res.ok) {

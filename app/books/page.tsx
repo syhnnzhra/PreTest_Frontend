@@ -4,6 +4,7 @@ import UpdateBook from "./updateBook";
 import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
 import { SessionData, sessionOptions } from "@/lib/sessionConfig";
+import Navigation from '../components/navigation/Navigation';
 
 type Book = {
     id: string;
@@ -45,11 +46,11 @@ async function getBooks() {
 
 export default async function BookList() {
     try {
-        const books: { data?: Book[] } = await getBooks(); // Ensure 'data' is optional
-        // console.log('Books:', books);
+        const books: { data?: Book[] } = await getBooks();
 
         return (
             <div className="px-10 py-10">
+                <Navigation />
                 <div className="py-2">
                     <AddBook />
                 </div>
