@@ -31,18 +31,15 @@ async function getIronSessionData() {
 }
 async function getBooks() {
     const token = await getIronSessionData();
-    const res = await fetch(
-        "https://book-crud-service-6dmqxfovfq-et.a.run.app/api/books",
-        {
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            //ambil data setiap request
-            // cache: 'no-store',
-            next: { revalidate: 10 },
-        }
-    );
+    const res = await fetch(`${process.env.SERVER_PUBIC_URL}/api/books`, {
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        //ambil data setiap request
+        // cache: 'no-store',
+        next: { revalidate: 10 },
+    });
     return res.json();
 }
 
