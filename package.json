@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "^2.0.0-alpha.3",
     "axios": "^1.6.3",
+    "clsx": "^2.1.0",
     "daisyui": "^4.4.24",
+    "iron-session": "^8.0.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
