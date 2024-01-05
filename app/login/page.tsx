@@ -96,12 +96,12 @@ const page = () => {
                     </form>
 
                     <p className="mt-10 text-sm text-center text-gray-500">
-                        Not a member?{" "}
+                        Doesn't have an account?{" "}
                         <a
-                            href="#"
+                            href="/register"
                             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
                         >
-                            Start a 14 day free trial
+                            Register
                         </a>
                     </p>
                 </div>
