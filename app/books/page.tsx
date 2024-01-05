@@ -4,7 +4,8 @@ import UpdateBook from "./updateBook";
 import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
 import { SessionData, sessionOptions } from "@/lib/sessionConfig";
-import Navigation from '../components/navigation/Navigation';
+// import Navigation from '../components/navigation/Navigation';
+import Navbar from '../components/navigation/Navbar';
 
 type Book = {
     id: string;
@@ -49,49 +50,43 @@ export default async function BookList() {
         const books: { data?: Book[] } = await getBooks();
 
         return (
-            <div className="px-10 py-10">
-                <Navigation />
-                <div className="py-2">
-                    <AddBook />
-                </div>
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>no</th>
-                            <th>isbn</th>
-                            <th>title</th>
-                            <th>subtitle</th>
-                            <th>author</th>
-                            <th>published</th>
-                            <th>pages</th>
-                            <th>description</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {books.data?.map((book, index) => (
-                            <tr key={book.id}>
-                                <td>{index + 1}</td>
-                                <td>{book.isbn}</td>
-                                <td>{book.title}</td>
-                                <td>{book.subtitle}</td>
-                                <td>{book.author}</td>
-                                <td>{book.published}</td>
-                                <td>{book.pages}</td>
-                                <td>{book.description}</td>
-                                <td className="flex">
-                                    <UpdateBook {...book} />
-                                    <DeleteBook {...book} />
-                                </td>
-                            </tr>
+            <div className="">
+                <Navbar />
+                <div className="container mx-auto">
+                    <div className="py-2">
+                        <AddBook />
+                    </div>
+                    
+                    <div className="flex flex-wrap justify-between">
+                        {books.data?.map((book) => (
+                            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-3" key={book.id}>
+                                <div className="p-5">
+                                    <a href="#">
+                                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{book.title}</h5>
+                                    </a>
+                                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{book.description}</p>
+                                    <div className="mt-3 flex justify-between">
+                                        <div className="flex items-center">
+                                            <span className="text-gray-500">Author: {book.author}</span>
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 flex justify-between">
+                                        <div className="flex items-center">
+                                            <span className="text-gray-500"><UpdateBook {...book} /></span>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <span className="text-gray-500"><DeleteBook {...book} /></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         );
     } catch (error) {
         console.error("Error fetching books:", error);
-        // Handle the error, e.g., display an error message or redirect
         return <div>Error fetching books</div>;
     }
 }
